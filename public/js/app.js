@@ -5147,6 +5147,9 @@ __webpack_require__.r(__webpack_exports__);
       this.name = '';
       this.description = '';
       this.price = '';
+    },
+    truncateText: function truncateText(source, size) {
+      return source.length > size ? source.slice(0, size - 1) + "…" : source;
     }
   }
 });
@@ -5173,7 +5176,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
-    staticClass: "col-md-6"
+    staticClass: "col-md-12"
   }, [_c("div", {
     staticClass: "card"
   }, [_c("div", {
@@ -5181,7 +5184,9 @@ var render = function render() {
   }, [_vm._v("Todo")]), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("div", {
-    staticClass: "input-group"
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-2"
   }, [_c("input", {
     directives: [{
       name: "model",
@@ -5189,7 +5194,7 @@ var render = function render() {
       value: _vm.name,
       expression: "name"
     }],
-    staticClass: "form-group",
+    staticClass: "form-control",
     attrs: {
       type: "text",
       placeholder: "Name..",
@@ -5205,16 +5210,17 @@ var render = function render() {
         _vm.name = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("input", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-6"
+  }, [_c("textarea", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.description,
       expression: "description"
     }],
-    staticClass: "form-group",
+    staticClass: "form-control",
     attrs: {
-      type: "text",
       placeholder: "Description..",
       "arial-label": "description",
       "arial-describedby": "description"
@@ -5228,14 +5234,16 @@ var render = function render() {
         _vm.description = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("input", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-2"
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.price,
       expression: "price"
     }],
-    staticClass: "form-group",
+    staticClass: "form-control",
     attrs: {
       type: "text",
       placeholder: "Price..",
@@ -5251,8 +5259,8 @@ var render = function render() {
         _vm.price = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "input-group-append"
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "col-2"
   }, [!_vm.edit_todo_id ? _c("button", {
     staticClass: "btn btn-info",
     attrs: {
@@ -5273,7 +5281,11 @@ var render = function render() {
         return _vm.updateTodo();
       }
     }
-  }, [_vm._v("Update")])]), _vm._v(" "), _c("button", {
+  }, [_vm._v("Update")])])]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-12"
+  }, [_c("button", {
     staticClass: "btn btn-sm",
     attrs: {
       type: "button"
@@ -5283,12 +5295,12 @@ var render = function render() {
         return _vm.resetTodo();
       }
     }
-  }, [_vm._v("Clear")])]), _vm._v(" "), _c("table", {
+  }, [_vm._v("Clear")])])]), _vm._v(" "), _c("table", {
     staticClass: "table table-bordered mt-5"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.todos, function (todo, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(++index))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(todo.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(todo.description))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(todo.price))]), _vm._v(" "), _c("td", [_c("button", {
+    }, [_c("td", [_vm._v(_vm._s(++index))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(todo.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.truncateText(todo.description, 25)))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(todo.price))]), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn btn-sm btn-info",
       attrs: {
         type: "button"

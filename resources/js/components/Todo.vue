@@ -1,20 +1,28 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Todo</div>
 
                     <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-group" type="text" v-model="name" placeholder="Name.." arial-label="todo" arial-describedby="name" />
-                            <input class="form-group" type="text" v-model="description" placeholder="Description.." arial-label="description" arial-describedby="description" />
-                            <input class="form-group" type="text" v-model="price" placeholder="Price.." arial-label="price" arial-describedby="price" />
-                            <div class="input-group-append">
+                        <div class="row">
+                            <div class="col-2">
+                                <input class="form-control" type="text" v-model="name" placeholder="Name.." arial-label="todo" arial-describedby="name" />
+                            </div>
+                            <div class="col-6">
+                                <textarea class="form-control" v-model="description" placeholder="Description.." arial-label="description" arial-describedby="description"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <input class="form-control" type="text" v-model="price" placeholder="Price.." arial-label="price" arial-describedby="price" />
+                            </div>
+                            <div class="col-2">
                                 <button v-if="!edit_todo_id" type="button" class="btn btn-info" @click="addTodo()">Add</button>
                                 <button v-else type="button" class="btn btn-info" @click="updateTodo()">Update</button>
                             </div>
-                            <button type="button" class="btn btn-sm" @click="resetTodo()">Clear</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-12"><button type="button" class="btn btn-sm" @click="resetTodo()">Clear</button></div>
                         </div>
                         <table class="table table-bordered mt-5">
                             <thead>
@@ -30,7 +38,7 @@
                                 <tr v-for="(todo, index) in todos" :key="index">
                                     <td>{{++index}}</td>
                                     <td>{{todo.name}}</td>
-                                    <td>{{todo.description}}</td>
+                                    <td>{{truncateText(todo.description, 25)}}</td>
                                     <td>{{todo.price}}</td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-info" @click="editTodo(--index)" >Edit</button>
@@ -110,7 +118,11 @@
                 this.name = '';
                 this.description = '';
                 this.price = '';
+            },
+            truncateText(source, size) {
+              return source.length > size ? source.slice(0, size - 1) + "…" : source;
             }
+
         }
     }
 </script>
